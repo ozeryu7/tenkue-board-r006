@@ -1,0 +1,22 @@
+<div class="post_wrapper">
+  <div class="post_wrapper__content">
+    <div class="post_wrapper__content__post_form">
+      <h3>
+        <span>新規投稿</span>
+      </h3>
+      <%= form_for(@post) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <div class="form_area">
+          <div class="form_area__field">
+            <%= f.text_field :content, class: 'textarea' %>
+          </div>
+        </div>
+        <div class="form_area__action">
+          <div class="form_area__action__btn">
+            <%= f.submit "投稿", class: "cursor" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
