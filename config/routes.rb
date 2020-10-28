@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: 'posts#index'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     passwords: 'users/passwords'
@@ -8,6 +9,5 @@ Rails.application.routes.draw do
   end
   resources :posts
 
-  root to: 'posts#index'
 
 end
