@@ -7,7 +7,7 @@
   <div class="post_wrapper__content">
     <ul class="post_wrapper__content__post_list">
       <% if @posts.count == 0 %>
-        <p>「まだ投稿されたスレッドはありません。」</p>
+        <li>「まだ投稿されたスレッドはありません。」</li>
       <% else %>
         <% @posts.each do |post| %>
           <li>
