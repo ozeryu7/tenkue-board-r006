@@ -1,8 +1,7 @@
 <header class="header">
   <div class="header__bar">
     <h1>
-      <%# ルートパスへのリンクを設置 %>
-      <a href="/">転クエ掲示板</a>
+      <%= link_to "転クエ掲示板", root_path %>
     </h1>
     <%# ログイン状態に応じて表記を変更すること %>
     <ul class="header__bar__user_nav">
