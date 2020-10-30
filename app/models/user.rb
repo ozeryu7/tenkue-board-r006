@@ -3,6 +3,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 8, maximum: 32 }
+  validates :email, exclusion: { in: [/^[ぁ-んァ-ヶー一-龠]+$/] }, presence: true, uniqueness: true
+  validates :password, format: { with: /\A(?=.&#042;?[a-z])(?=.&#042;?\d)[a-z\d]+\z/i }, presence: true, length: { in: 8..32 }
 end
