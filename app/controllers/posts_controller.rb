@@ -1,5 +1,9 @@
 class PostsController < ApplicationController
-  #before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
+  
+  def index
+    @posts = Post.all.order(created_at: "DESC").includes(:user)
+  end
 
   def new
     @post = Post.new
@@ -14,14 +18,11 @@ class PostsController < ApplicationController
       render 'posts/new'
     end
   end
-  
-  def index
-    @posts = Post.all.order(created_at: "DESC").includes(:user)
-  end
 
   def show
     
   end
+  
 
   private
     def post_params
