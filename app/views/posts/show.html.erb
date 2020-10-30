@@ -35,10 +35,12 @@
               <span>1</span>
             </li>
           </ul>
-          <div class="post_detail__bottom_box__admin_actions">
-            編集
-            削除
-          </div>
+          <% if @post.user_id == current_user.id%>
+            <div class="post_detail__bottom_box__admin_actions">
+              編集
+              削除
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
