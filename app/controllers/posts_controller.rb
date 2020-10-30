@@ -5,6 +5,9 @@ class PostsController < ApplicationController
     @posts = Post.all.order(created_at: "DESC").includes(:user)
   end
 
+  def show
+  end
+
   def new
     @post = Post.new
   end
@@ -18,14 +21,10 @@ class PostsController < ApplicationController
       render 'posts/new'
     end
   end
-
-  def show
-    
-  end
   
 
   private
     def post_params
-      params.require(:post).permit(:content)
+      params.require(:post).permit(:content).merge(user_id: current_user.id)
     end
 end
