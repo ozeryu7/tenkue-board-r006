@@ -9,20 +9,17 @@
           <span>ゲストユーザ さん</span>
         </li>
         <li class="header__bar__user_nav__btn">
-          <%= link_to "ログアウト", "#" %>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
         </li>
         <li class="header__bar__user_nav__btn">
           <%= link_to "投稿する", "#" %>
         </li>
       <% else %>
         <li class="header__bar__user_nav__btn">
-          <%= link_to "ゲストログイン", "#" %> 
+          <%= link_to "ログイン", new_user_session_path %> 
         </li>
         <li class="header__bar__user_nav__btn">
-          <%= link_to "ログイン", "#" %> 
-        </li>
-        <li class="header__bar__user_nav__btn">
-          <%= link_to "新規登録", "#" %> 
+          <%= link_to "新規登録", new_user_registration_path %> 
         </li>
       <% end %>
     </ul>
