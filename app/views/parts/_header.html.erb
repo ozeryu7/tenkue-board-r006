@@ -6,7 +6,7 @@
     <ul class="header__bar__user_nav">
       <% if user_signed_in? %>
         <li class="user_name">
-          <span>ゲストユーザ さん</span>
+          <span><%= current_user.name %> さん</span>
         </li>
         <li class="header__bar__user_nav__btn">
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
