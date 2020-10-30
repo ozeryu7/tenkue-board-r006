@@ -14,14 +14,14 @@
             <div class="post">
               <div class="post__top_box">
                 <div class="post__top_box__name">
-                  <span>投稿者：<% post.user.name %></span>
+                  <span><%= post.user.name %></span>
                 </div>
                 <div class="post__top_box__time">
-                  <span>投稿日時：<% post.created_at %></span>
+                  <span>投稿日時：<%= post.created_at %></span>
                 </div>
               </div>  
               <div class="post__middle_box">
-                <span><% post.content %></span>
+                <span><%= post.content %></span>
               </div>
               <div class="post__bottom_box">
                 <ul class="post__bottom_box__user_actions">
