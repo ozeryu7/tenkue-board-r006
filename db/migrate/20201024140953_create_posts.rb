@@ -1,6 +1,8 @@
 class CreatePosts < ActiveRecord::Migration[5.2]
   def change
-    create_table :postss do |t|
+    create_table :posts do |t|
+      t.text :content
+      t.references :user, foreign_key: true
       t.timestamps
     end
   end
