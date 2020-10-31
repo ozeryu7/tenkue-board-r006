@@ -12,6 +12,7 @@
         <% @posts.each do |post| %>
           <li>
             <div class="post">
+<<<<<<< HEAD
               <div class="post__top_box">
                 <div class="post__top_box__name">
                   <span><%= post.user.name %></span>
@@ -38,8 +39,31 @@
                   <ul class="post__bottom_box__admin_actions">
                     <li>編集</li>
                     <li>削除</li>
+=======
+              <%= link_to post_path(post.id) ,class:"post-link" do%>
+                <div class="post__top_box">
+                  <div class="post__top_box__name">
+                    <span>投稿者：<%= post.user.name %></span>
+                  </div>
+                  <div class="post__top_box__time">
+                    <span>投稿日時：<%= post.created_at %></span>
+                  </div>
+                </div>  
+                <div class="post__middle_box">
+                  <span><%= post.content %></span>
+                </div>
+                <div class="post__bottom_box">
+                  <ul class="post__bottom_box__user_actions">
+                    <li>
+                      <i class="far fa-comment-alt"></i>
+                      <span>1</span>
+                    </li>
+                    <li>
+                      <i class="far fa-heart"></i>
+                      <span>1</span>
+                    </li>
+>>>>>>> 70120c314f74f0db51c045f189be451b152249f5
                   </ul>
-<<<<<<< HEAD
                   
                   <% if user_signed_in? && post.user_id == current_user.id %>
                     <ul class="post__bottom_box__admin_actions">
@@ -49,10 +73,6 @@
                   <% end %>
                 </div>
               <% end %>
-=======
-                <% end %>
-              </div>
->>>>>>> parent of a4f7154... pullした内容を反映
             </div>
           </li>
         <% end %>
