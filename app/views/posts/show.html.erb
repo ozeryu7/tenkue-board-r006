@@ -15,30 +15,30 @@
       <div class="post_detail">
         <div class="post_detail__top_box">
           <div class="post_detail__top_box__name">
-            <span>投稿者：投稿者名</span>
+            <span>投稿者：<%= @post.user.name %></span>
           </div>
           <div class="post_detail__top_box__name">
-            <span>投稿日時：投稿日時</span>
+            <span>投稿日時：<%= @post.created_at %></span>
           </div>
         </div>  
         <div class="post_detail__middle_box">
-          <span>投稿内容</span>
+          <span><%= @post.content %></span>
         </div>
         <div class="post_detail__bottom_box">
           <ul class="post_detail__bottom_box__user_actions">
             <li>
               <i class="far fa-comment-alt"></i>
-              <span>コメント数</span>
+              <span>1</span>
             </li>
             <li>
               <i class="far fa-heart"></i>
-              <span>いいね数</span>
+              <span>1</span>
             </li>
           </ul>
-          <div class="post_detail__bottom_box__admin_actions">
-            編集
-            削除
-          </div>
+          <ul class="post_detail__bottom_box__admin_actions">
+            <li>編集</li>
+            <li>削除</li>
+          </ul>
         </div>
       </div>
     </div>
