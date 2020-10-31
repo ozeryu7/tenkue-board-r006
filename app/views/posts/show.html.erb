@@ -4,10 +4,10 @@
       <span>投稿詳細</span>
     </h3>
     <div class="back_link">
-      <i class="fas fa-angle-double-left"></i>
-      <span>
-        <%= link_to "一覧へ戻る", "/posts" %>
-      </span>
+      <%= link_to root_path do%>
+        <i class="fas fa-angle-double-left"></i>
+        <span>一覧へ戻る</span>
+      <% end %>
     </div>
   </div>
   <div class="post_wrapper__content scroll">
@@ -18,7 +18,7 @@
             <span>投稿者：<%= @post.user.name %></span>
           </div>
           <div class="post_detail__top_box__name">
-            <span>投稿日時：<%= @post.created_at %></span>
+            <span>投稿日時：<%= @post.created_at.to_s(:datetime_jp)%></span>
           </div>
         </div>  
         <div class="post_detail__middle_box">
@@ -35,20 +35,17 @@
               <span>1</span>
             </li>
           </ul>
-          <% if user_signed_in? %>
-            <% if @post.user_id == current_user.id %>
-              <div class="post_detail__bottom_box__admin_actions">
-                <%= link_to "編集", "#" %></li>
-                <%= link_to "削除", "#" %></li>
-              </div>
-            <% end %>
+          <% if @post.user_id == current_user.id%>
+            <div class="post_detail__bottom_box__admin_actions">
+              編集
+              削除
+            </div>
           <% end %>
         </div>
       </div>
     </div>
     <div class="comment_area">
       <ul class="comment_area__list">
-      <%# コメントがある場合は、全てのコメントが表示されていること %>
         <li class="comment_area__list__comment">
           <div class="comment_area__list__comment__left_box">
             <span>コメント投稿者</span>
