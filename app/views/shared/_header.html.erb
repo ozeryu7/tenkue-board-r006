@@ -24,4 +24,9 @@
       <% end %>
     </ul>
   </div>
+  <% flash.each do |message_type, message| %>
+    <div class="notifications">
+      <div class="<%= message_type %>"><%= message %></div>
+    </div>
+  <% end %>
 </header>
