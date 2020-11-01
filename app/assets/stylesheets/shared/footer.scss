@@ -1,0 +1,22 @@
+.footer {
+  height: 64px;
+  width: 100%;
+  min-width: 980px;
+  background-color: whitesmoke;
+  &__wrapper {
+    width: 980px;
+    margin: 0 auto;
+    padding-top: 8px;
+    &__h4 {
+      height: 32px;
+      font-size: 18px;
+      color: #000000;
+    }
+    &__copylight {
+      height: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: dimgray;
+    }
+  }
+}
