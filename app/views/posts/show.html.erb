@@ -34,13 +34,13 @@
               <i class="far fa-heart"></i>
               <span>1</span>
             </li>
-            <% if user_signed_in? && @post.user_id == current_user.id %>
-              <div class="post_detail__bottom_box__admin_actions">
-                <%= link_to "編集", edit_post_path(@post.id) %>
-                <%= link_to "削除", @post, method: :delete, data: { confirm: '本当に削除して良いですか?', cancel: 'やめる', commit: '削除する'}, title: '削除確認' %>
-              </div>
-            <% end %>
           </ul>
+          <% if user_signed_in? && @post.user_id == current_user.id %>
+            <div class="post_detail__bottom_box__admin_actions">
+              <%= link_to "編集", edit_post_path(@post.id) %>
+              <%= link_to "削除", @post, method: :delete, data: { confirm: '本当に削除して良いですか?', cancel: 'やめる', commit: '削除する'}, title: '削除確認' %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
