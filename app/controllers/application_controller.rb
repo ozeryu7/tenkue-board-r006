@@ -8,4 +8,11 @@ class ApplicationController < ActionController::Base
     added_attrs = [ :name, :email, :password ]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
   end
+
+  def check_guest
+    email = resources&.email || params[:user][:email].downcase
+    if email == 'guest@example.com'
+      redirect_to root_path, alert: 'ゲストユーザーは変更・削除できません。'
+    end
+  end
 end
