@@ -25,11 +25,21 @@ class PostsController < ApplicationController
   end
 
   def edit
+  end
 
+  def update
+    if @post.update_attributes(post_params)
+      flash[:notice] = "編集しました"
+      redirect_to root_url
+    else
+      render 'posts/edit'
+    end
   end
 
   def destroy 
-
+    @post.destroy
+    flash[:notice] = "削除しました"
+    redirect_to root_url
   end
 
   private
