@@ -8,7 +8,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @comments = @post.comments.order("created_at DESC")
+    @comments = @post.comments.includes(:user).order("created_at DESC")
     @comment = @post.comments.build(user_id: current_user.id, post_id: @post.id) if current_user
   end
 
