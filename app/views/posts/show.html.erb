@@ -53,8 +53,10 @@
             </div>
             <div class="comment_area__list__comment__right_box">
               <div class="comment_area__list__comment__right_box__info">
-                <span>編集</span>
-                <span>削除</span>
+                <% if user_signed_in? && post.user_id == current_user.id %>
+                  <span>編集</span>
+                  <span>削除</span>
+                <% end %>
                 <span>投稿日時：<%= comment.created_at.to_s(:datetime_jp) %></span>
               </div>
               <div class="comment_area__list__comment__right_box__text">
