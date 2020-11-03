@@ -55,7 +55,7 @@
               <div class="comment_area__list__comment__right_box__info">
                 <% if user_signed_in? && comment.user_id == current_user.id %>
                   <span><%= link_to "編集", edit_post_comment_path(comment.id) %></span>
-                  <span><%= link_to "削除", comment, method: :delete, data: { confirm: '本当に削除して良いですか?', cancel: 'やめる', commit: '削除する'}, title: '削除確認' %></span>
+                  <span><%= link_to "削除", post_comment_path(@post, comment), method: :delete, data: { confirm: '本当に削除して良いですか?', cancel: 'やめる', commit: '削除する'}, title: '削除確認' %></span>
                 <% end %>
                 <span>投稿日時：<%= comment.created_at.to_s(:datetime_jp) %></span>
               </div>
@@ -72,10 +72,6 @@
             <%= render 'shared/error_messages', object: f.object %>
             <div class="comment_area__form_box__form__field">
               <%= f.text_area :comment, placeholder: 'コメントを入力', value: @comment.comment %>
-            </div>
-            <div class="comment_area__form_box__form__hidden_field">
-              <%= f.hidden_field :user_id, value: current_user.id %>
-              <%= f.hidden_field :post_id, value: @post.id %>
             </div>
             <div class="comment_area__form_box__form__action">
               <%= f.submit "送信", class: "comment_area__form_box__form__action__btn" %>
