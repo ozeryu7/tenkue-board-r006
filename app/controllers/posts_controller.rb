@@ -48,7 +48,7 @@ class PostsController < ApplicationController
     end
 
     def authenticate_admin!
-      @post = Post.includes(:user).find(params[:id])
+      @post = Post.find(params[:id])
       
       if @post.user_id != current_user.id
         flash[:notice] = "権限はありません"
