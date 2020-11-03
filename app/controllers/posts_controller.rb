@@ -10,6 +10,10 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def show
+    
+  end
+
   def new
     @post = Post.new
   end
@@ -56,3 +60,4 @@ class PostsController < ApplicationController
       end
     end
 end
+
