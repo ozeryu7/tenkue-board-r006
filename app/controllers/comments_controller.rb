@@ -2,7 +2,8 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @comment = @post.comment.new(comment_params)
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.new(comment_params)
     if @comment.save
       redirect_back(fallback_location: root_path)
     else
