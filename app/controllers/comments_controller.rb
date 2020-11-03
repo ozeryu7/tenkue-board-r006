@@ -3,9 +3,9 @@ class CommentsController < ApplicationController
   before_action :authenticate_admin!, only: [:edit, :update, :destroy]
 
   def edit
-    @post = Post.find(params[:id])
-    @comments = @post.comments.order("created_at DESC")
-    @comment = @post.comments.build(user_id: current_user.id, post_id: @post.id) if current_user
+    @comment = Comment.find(params[:id])
+    @post = Post.find(@comment.post_id)
+    @comments = @post.comments.includes(:user).order("created_at DESC")
   end
 
   def create
@@ -20,17 +20,19 @@ class CommentsController < ApplicationController
   end
 
   def update
+    comment_params[:post_id] = @comment.post_id
     if @comment.update_attributes(comment_params)
       redirect_to post_path(@comment.post_id)
     else
-      render 'comments/edit'
+      flash[:alert] = "コメントを(140文字以内で)入力してください。"
+      redirect_back(fallback_location: root_path)
     end
   end
 
   def destroy
+    @post = Post.find(params[:post_id])
     @comment.destroy
-    flash[:notice] = "削除しました"
-    redirect_to root_url
+    redirect_to post_path(@post)
   end
 
   private
