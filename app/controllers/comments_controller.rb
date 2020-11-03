@@ -3,7 +3,9 @@ class CommentsController < ApplicationController
   before_action :authenticate_admin!, only: [:edit, :update, :destroy]
 
   def edit
-    
+    @post = Post.find(params[:id])
+    @comments = @post.comments.order("created_at DESC")
+    @comment = @post.comments.build(user_id: current_user.id, post_id: @post.id) if current_user
   end
 
   def create
@@ -17,11 +19,17 @@ class CommentsController < ApplicationController
   end
 
   def update
-
+    if @comment.update_attributes(comment_params)
+      redirect_to post_path(@comment.post_id)
+    else
+      render 'comments/edit'
+    end
   end
 
   def destroy
-
+    @comment.destroy
+    flash[:notice] = "削除しました"
+    redirect_to root_url
   end
 
   private
@@ -30,11 +38,11 @@ class CommentsController < ApplicationController
     end
 
     def authenticate_admin!
-      @post = Post.find(params[:id])
+      @comment = Comment.find(params[:id])
       
-      if @post.user_id != current_user.id
+      if @comment.user_id != current_user.id
         flash[:notice] = "権限はありません"
-        redirect_to root_url
+        redirect_to post_path(@comment.post_id)
       end
     end
 end

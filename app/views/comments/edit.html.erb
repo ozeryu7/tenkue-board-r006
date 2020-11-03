@@ -71,7 +71,7 @@
           <%= form_with(model:[@post, @comment], method: :post, class: "comment_area__form_box__form", local: true) do |f| %>
             <%= render 'shared/error_messages', object: f.object %>
             <div class="comment_area__form_box__form__field">
-              <%= f.text_area :comment, placeholder: 'コメントを入力' %>
+              <%= f.text_area :comment, placeholder: 'コメントを入力', value: @comment.comment %>
             </div>
             <div class="comment_area__form_box__form__hidden_field">
               <%= f.hidden_field :user_id, value: current_user.id %>
