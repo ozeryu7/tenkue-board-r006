@@ -3,26 +3,25 @@
     <h1>
       <%= link_to "転クエ掲示板", root_path %>
     </h1>
-    <%# ログイン状態に応じて表記を変更すること %>
     <ul class="header__bar__user_nav">
-      <li class="user_name">
-        <span>ゲストユーザ さん</span>
-      </li>
-      <li class="header__bar__user_nav__btn">
-        <%= link_to "ログアウト", "#" %>
-      </li>
-      <li class="header__bar__user_nav__btn">
-        <%= link_to "投稿する", "#" %>
-      </li>
-      <li class="header__bar__user_nav__btn">
-        <%= link_to "投稿する", "#" %>    
-      </li>
-      <li class="header__bar__user_nav__btn">
-        <%= link_to "ログイン", "#" %> 
-      </li>
-      <li class="header__bar__user_nav__btn">
-        <%= link_to "新規登録", "#" %> 
-      </li>
+      <% if user_signed_in? %>
+        <li class="user_name">
+          <span><%= current_user.name %> さん</span>
+        </li>
+        <li class="header__bar__user_nav__btn">
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        </li>
+        <li class="header__bar__user_nav__btn">
+          <%= link_to "投稿する", "#" %>
+        </li>
+      <% else %>
+        <li class="header__bar__user_nav__btn">
+          <%= link_to "ログイン", new_user_session_path %> 
+        </li>
+        <li class="header__bar__user_nav__btn">
+          <%= link_to "新規登録", new_user_registration_path %> 
+        </li>
+      <% end %>
     </ul>
   </div>
 </header>
