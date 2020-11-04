@@ -11,6 +11,12 @@ RSpec.describe Post do
     end
 
     context 'can not save' do
+      it "is invalid without a content" do
+        post = build(:post, content: nil)
+        post.valid?
+        expect(post.errors[:content]).to include("を入力してください")
+      end
+
     end
   end
 end
