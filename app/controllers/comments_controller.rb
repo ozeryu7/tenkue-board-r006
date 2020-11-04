@@ -5,10 +5,10 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = @post.comments.new(comment_params)
     if @comment.save
-      redirect_back(fallback_location: root_path)
+      redirect_to post_path(@post.id)
     else
       flash[:alert] = "コメントを(140文字以内で)入力してください。"
-      redirect_back(fallback_location: root_path)
+      redirect_to post_path(@post.id)
     end
   end
 
