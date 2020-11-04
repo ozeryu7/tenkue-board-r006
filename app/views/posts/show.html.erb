@@ -38,7 +38,7 @@
                     <span><%= @post.likes.count %></span>
                   <% end %>
                 <% else %>
-                  <%= button_to like_path(@post) ,method: :post do %>
+                  <%= button_to likes_path(@post) ,method: :post do %>
                     <i class="far fa-heart"></i>
                     <span><%= @post.likes.count %></span>
                   <% end %>
