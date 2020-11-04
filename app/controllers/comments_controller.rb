@@ -4,12 +4,12 @@ class CommentsController < ApplicationController
 
   def edit
     @comment = Comment.find(params[:id])
-    @post = Post.find(@comment.post_id)
+    @post = find_post(@comment.post_id)
     @comments = @post.comments.includes(:user).order("created_at DESC")
   end
 
   def create
-    @post = Post.find(params[:post_id])
+    @post = find_post(params[:post_id])
     @comment = @post.comments.new(comment_params)
     if @comment.save
       redirect_to post_path(@post.id)
@@ -30,7 +30,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:post_id])
+    @post = find_post(params[:post_id])
     @comment.destroy
     redirect_to post_path(@post)
   end
@@ -47,5 +47,9 @@ class CommentsController < ApplicationController
         flash[:notice] = "権限はありません"
         redirect_to post_path(@comment.post_id)
       end
+    end
+
+    def find_post(post_id)
+      Post.find(post_id)
     end
 end
