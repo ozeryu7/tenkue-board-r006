@@ -21,5 +21,13 @@ module OurBoard
     config.i18n.default_locale = :ja
     config.time_zone = 'Tokyo'
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
+
+    config.generators do |g|  
+      g.test_framework :rspec, 
+        view_specs: false, 
+        helper_specs: false, 
+        controller_specs: false, 
+        routing_specs: false
+    end  
   end
 end
