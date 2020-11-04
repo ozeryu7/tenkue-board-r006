@@ -190,7 +190,13 @@
     color: $color_note;
     text-shadow: 0px 0px 20px rgb(124, 121, 123);
   }
-  .post_liked {
-    color: $color_actioned;
+  .fa-heart {
+    &.post_liked {
+      color: $color_actioned;
+    }
+    &:hover {
+      text-shadow: 0px 0px 20px #ff00aa;
+      color: $color_actioned;
+    }
   }
 }
