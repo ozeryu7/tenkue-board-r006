@@ -33,12 +33,12 @@
                     <li>
                       <% if user_signed_in?%>
                         <% if current_user.already_liked?(post) %>
-                          <%= button_to like_path(post.id, post_id: post.id) , method: :delete do %>
+                          <%= button_to like_path(post.id, post_id: post.id), class: "heart", method: :delete do %>
                             <i class="fas fa-heart post_liked"></i>
                             <span><%= post.likes.count %></span>
                           <% end %>
                         <% else %>
-                          <%= button_to likes_path(post.id, post_id: post.id), method: :post do %>
+                          <%= button_to likes_path(post.id, post_id: post.id), class: "heart",  method: :post do %>
                             <i class="far fa-heart"></i>
                             <span><%= post.likes.count %></span>
                           <% end %>
