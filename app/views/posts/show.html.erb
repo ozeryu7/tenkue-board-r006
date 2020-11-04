@@ -32,7 +32,10 @@
             </li>
             <li>
               <% if user_signed_in?%>
-
+                <%= button_to post_like_path(@post) do %>
+                  <i class="far fa-heart"></i>
+                  <span><%= @post.likes.count %></span>
+                <% end %>
               <% else %>
                 <i class="far fa-heart"></i>
                 <span><%= @post.likes.count %></span>
