@@ -33,19 +33,25 @@
             <li>
               <% if user_signed_in?%>
                 <% if current_user.already_liked?(@post) %>
-                  <%= button_to like_path(post_id: @post.id), class: "heart", method: :delete do %>
-                    <i class="fas fa-heart post_liked"></i>
-                    <span><%= @post.likes.count %></span>
+                  <%= button_to like_path(post_id: @post.id), class: "heart post_liked", method: :delete do %>
+                    <i class="fas fa-heart"></i>
+                    <% if @post.likes.count > 0 %>
+                      <span><%= @post.likes.count %></span>
+                    <% end %>
                   <% end %>
                 <% else %>
                   <%= button_to likes_path(post_id: @post.id), class: "heart", method: :post do %>
                     <i class="far fa-heart"></i>
-                    <span><%= @post.likes.count %></span>
+                    <% if @post.likes.count > 0 %>
+                      <span><%= @post.likes.count %></span>
+                    <% end %>
                   <% end %>
                 <% end%>
               <% else %>
                 <i class="far fa-heart"></i>
-                <span><%= @post.likes.count %></span>
+                <% if @post.likes.count > 0 %>
+                  <span><%= @post.likes.count %></span>
+                <% end %>
               <% end%>
             </li>
           </ul>
