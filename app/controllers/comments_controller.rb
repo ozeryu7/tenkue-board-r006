@@ -20,7 +20,6 @@ class CommentsController < ApplicationController
   end
 
   def update
-    comment_params[:post_id] = @comment.post_id
     if @comment.update_attributes(comment_params)
       redirect_to post_path(@comment.post_id)
     else
