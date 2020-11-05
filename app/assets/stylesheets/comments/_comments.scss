@@ -19,6 +19,12 @@
         &__info {
           color: $color_note;
           text-align: right;
+          & a {
+            color: $color_link;
+          }
+          & :hover {
+            text-decoration: underline;
+          }
         }
         &__text {
           font-size: $font_size_content;
