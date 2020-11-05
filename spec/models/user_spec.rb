@@ -16,11 +16,13 @@ RSpec.describe User do
         expect(user.errors[:name]).to include("を入力してください")
       end
 
-      it "is invalid without a email" do
+      it "is invalid without a name" do
         user = build(:user, email: nil)
         user.valid?
-        expect(user.errors[:email].to include("を入力してください"))
+        expect(user.errors[:email]).to include("を入力してください")
       end
+
+
 
       
     end
