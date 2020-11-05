@@ -28,7 +28,7 @@
           <ul class="post_detail__bottom_box__user_actions">
             <li>
               <i class="far fa-comment-alt"></i>
-              <span>1</span>
+              <span><%= @post.comments.count %></span>
             </li>
             <li>
               <i class="far fa-heart"></i>
@@ -46,25 +46,37 @@
     </div>
     <div class="comment_area">
       <ul class="comment_area__list">
-        <li class="comment_area__list__comment">
-          <div class="comment_area__list__comment__left_box">
-            <span>コメント投稿者</span>
-          </div>
-          <div class="comment_area__list__comment__right_box">
-            <div class="comment_area__list__comment__right_box__info">
-              <span>編集</span>
-              <span>削除</span>
-              <span>投稿日時：投稿日時</span>
+        <% @comments.each do |comment| %>
+          <li class="comment_area__list__comment">
+            <div class="comment_area__list__comment__left_box">
+              <span><%= comment.user.name %></span>
             </div>
-            <div class="comment_area__list__comment__right_box__text">
-              <span>コメント内容</span>
+            <div class="comment_area__list__comment__right_box">
+              <div class="comment_area__list__comment__right_box__info">
+                <span>編集</span>
+                <span>削除</span>
+                <span>投稿日時：<%= comment.created_at.to_s(:datetime_jp) %></span>
+              </div>
+              <div class="comment_area__list__comment__right_box__text">
+                <span><%= comment.comment %></span>
+              </div>
             </div>
-          </div>
-        </li>
+          </li>
+        <% end %>
       </ul>
-      <div class="comment_area__form_box">
-        <%# コメントのフォームを設置 %>
-      </div>
+      <% if user_signed_in? %>
+        <div class="comment_area__form_box">
+          <%= form_with(model:[@post, @comment], method: :post, class: "comment_area__form_box__form", local: true) do |f| %>
+            <%= render 'shared/error_messages', object: f.object %>
+            <div class="comment_area__form_box__form__field">
+              <%= f.text_area :comment, placeholder: 'コメントを入力' %>
+            </div>
+            <div class="comment_area__form_box__form__action">
+              <%= f.submit "送信", class: "comment_area__form_box__form__action__btn" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
