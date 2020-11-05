@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_admin!, only: [:edit, :update, :destroy]
-  before_action :find_post
+  before_action :set_post
 
   def edit
     @comment = Comment.find(params[:id])
@@ -46,7 +46,7 @@ class CommentsController < ApplicationController
       end
     end
 
-    def find_post
+    def set_post
       @post = Post.find(params[:post_id])
     end
 end
