@@ -22,7 +22,11 @@ RSpec.describe User do
         expect(user.errors[:email]).to include("を入力してください")
       end
 
-
+      it "is invalid without a password" do
+        user = build(:user, password: nil)
+        user.valid?
+        expect(user.errors[:password]).to include("を入力してください", "は不正な値です", "は8文字以上で入力してください")
+      end
 
       
     end
