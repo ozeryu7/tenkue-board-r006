@@ -35,7 +35,7 @@ RSpec.describe User do
       end
 
       it "is invalid because it doesn't match password and password_confirmation" do
-        user = build(:user, password_confirmation: 12345678)
+        user = build(:user, password_confirmation: "test1234")
         user.valid?
         expect(user.errors[:password_confirmation]).to include("とパスワードの入力が一致しません")
       end
