@@ -25,7 +25,7 @@
       <%= form_with(model:@comment, class: "comment_area__form_box__form", local: true) do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
         <div class="comment_area__form_box__form__field">
-          <%= f.text_area :comment, placeholder: 'コメントを入力', value: @comment.comment %>
+          <%= f.text_area :comment, placeholder: 'コメントを入力'%>
         </div>
         <div class="comment_area__form_box__form__action">
           <%= f.submit "送信", class: "comment_area__form_box__form__action__btn" %>
