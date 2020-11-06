@@ -29,7 +29,7 @@ RSpec.describe User do
       end
 
       it "is invalid because the email contains double-byte characters" do
-        user = build(:user, email: "あtest1234")
+        user = build(:user, email: "あtest1234@test.com")
         user.valid?
         expect(user.errors[:email]).to include("は不正な値です")
       end
