@@ -27,6 +27,11 @@ RSpec.describe User do
         user.valid?
         expect(user.errors[:email]).to include("は不正な値です")
       end
+      it "is invalid because it doesn't contain . in the email" do
+        user = build(:user, email: "test1234@test")
+        user.valid?
+        expect(user.errors[:email]).to include("は不正な値です")
+      end
 
       it "is invalid because the email contains double-byte characters" do
         user = build(:user, email: "あtest1234@test.com")
