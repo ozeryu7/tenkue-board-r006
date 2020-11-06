@@ -52,6 +52,12 @@ RSpec.describe User do
         expect(user.errors[:password]).to include("を入力してください", "は不正な値です", "は8文字以上で入力してください")
       end
 
+      it "is invalid because the password contains only a string" do
+        user = build(:user, password: "aaaaaaaaaaa")
+        user.valid?
+        expect(user.errors[:password]).to include("は不正な値です")
+      end
+
       it "is valid with a password that has less than 8 characters " do
         user = build(:user, password: "a12345")
         user.valid?
@@ -75,10 +81,6 @@ RSpec.describe User do
         user.valid?
         expect(user.errors[:password_confirmation]).to include("とパスワードの入力が一致しません")
       end
-      
-
-
-
     end
   end
 end
