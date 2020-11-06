@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 2020_11_03_110840) do
     t.index ["post_id"], name: "index_likes_on_post_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
-
   create_table "posts", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id"

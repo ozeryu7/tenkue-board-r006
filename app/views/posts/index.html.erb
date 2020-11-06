@@ -28,7 +28,7 @@
                   <ul class="post__bottom_box__user_actions">
                     <li>
                       <i class="far fa-comment-alt"></i>
-                      <span>1</span>
+                      <span><%= post.comments.count %></span>
                     </li>
                     <li>
                       <% if user_signed_in?%>

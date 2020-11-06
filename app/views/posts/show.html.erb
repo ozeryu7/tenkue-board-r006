@@ -28,7 +28,7 @@
           <ul class="post_detail__bottom_box__user_actions">
             <li>
               <i class="far fa-comment-alt"></i>
-              <span>1</span>
+              <span><%= @post.comments.count %></span>
             </li>
             <li>
               <% if user_signed_in?%>
@@ -64,27 +64,6 @@
         </div>
       </div>
     </div>
-    <div class="comment_area">
-      <ul class="comment_area__list">
-        <li class="comment_area__list__comment">
-          <div class="comment_area__list__comment__left_box">
-            <span>コメント投稿者</span>
-          </div>
-          <div class="comment_area__list__comment__right_box">
-            <div class="comment_area__list__comment__right_box__info">
-              <span>編集</span>
-              <span>削除</span>
-              <span>投稿日時：投稿日時</span>
-            </div>
-            <div class="comment_area__list__comment__right_box__text">
-              <span>コメント内容</span>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <div class="comment_area__form_box">
-        <%# コメントのフォームを設置 %>
-      </div>
-    </div>
+    <%= render 'shared/post_comments' %>
   </div>
 </div>
