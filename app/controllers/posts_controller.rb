@@ -12,10 +12,6 @@ class PostsController < ApplicationController
     @comment = @post.comments.build(user_id: current_user.id, post_id: @post.id) if current_user
   end
 
-  def show
-    
-  end
-
   def new
     @post = Post.new
   end
