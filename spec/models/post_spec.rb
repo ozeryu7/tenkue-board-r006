@@ -7,7 +7,6 @@ RSpec.describe Post do
         post = build(:post)
         expect(post).to be_valid
       end
-    
     end
 
     context 'can not save' do
@@ -17,6 +16,14 @@ RSpec.describe Post do
         expect(post.errors[:content]).to include("を入力してください")
       end
 
+      it "is valid with a content that has more than 140 characters " do
+        post = build(:post)
+        post.content = Faker::Lorem.characters(number:200)
+        post.valid?
+        expect(post.errors[:content]).to include("は140文字以内で入力してください")
+      end
+
     end
   end
 end
+
