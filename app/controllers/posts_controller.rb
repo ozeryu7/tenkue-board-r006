@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :authenticate_admin!, only: [:edit, :update, :destroy]
   before_action :set_post
-  
+
   def index
     @posts = Post.includes(:user).all.order("created_at DESC")
   end
@@ -14,7 +14,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    
+
   end
 
   def new
@@ -64,7 +64,7 @@ class PostsController < ApplicationController
     end
 
     def set_post
-      @post = Post.find(params[:post_id])
+      @post = Post.find(params[:id])
     end
 end
 
