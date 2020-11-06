@@ -1,84 +1,36 @@
-<div class="post_wrapper">
-  <div class="post_wrapper__header">
-    <h3>
-      <span>投稿詳細</span>
-    </h3>
-    <div class="back_link">
-      <%= link_to root_path do%>
-        <i class="fas fa-angle-double-left"></i>
-        <span>一覧へ戻る</span>
-      <% end %>
-    </div>
-  </div>
-  <div class="post_wrapper__content scroll">
-    <div class="post_wrapper__content__post_show">
-      <div class="post_detail">
-        <div class="post_detail__top_box">
-          <div class="post_detail__top_box__name">
-            <span>投稿者：<%= @post.user.name %></span>
-          </div>
-          <div class="post_detail__top_box__name">
-            <span>投稿日時：<%= @post.created_at.to_s(:datetime_jp)%></span>
-          </div>
-        </div>  
-        <div class="post_detail__middle_box">
-          <span><%= @post.content %></span>
+<div class="comment_area">
+  <ul class="comment_area__list">
+    <% @comments.each do |comment| %>
+      <li class="comment_area__list__comment">
+        <div class="comment_area__list__comment__left_box">
+          <span><%= comment.user.name %></span>
         </div>
-        <div class="post_detail__bottom_box">
-          <ul class="post_detail__bottom_box__user_actions">
-            <li>
-              <i class="far fa-comment-alt"></i>
-              <span><%= @post.comments.count %></span>
-            </li>
-            <li>
-              <i class="far fa-heart"></i>
-              <span>1</span>
-            </li>
-          </ul>
-          <% if user_signed_in? && @post.user_id == current_user.id %>
-            <div class="post_detail__bottom_box__admin_actions">
-              <%= link_to "編集", edit_post_path(@post.id) %>
-              <%= link_to "削除", @post, method: :delete, data: { confirm: '本当に削除して良いですか?', cancel: 'やめる', commit: '削除する'}, title: '削除確認' %>
-            </div>
-          <% end %>
+        <div class="comment_area__list__comment__right_box">
+          <div class="comment_area__list__comment__right_box__info">
+            <% if user_signed_in? && comment.user_id == current_user.id %>
+              <span><%= link_to "編集", edit_post_comment_path(@post.id, comment.id) %></span>
+              <span><%= link_to "削除", post_comment_path(@post, comment), method: :delete, data: { confirm: '本当に削除して良いですか?', cancel: 'やめる', commit: '削除する'}, title: '削除確認' %></span>
+            <% end %>
+            <span>投稿日時：<%= comment.created_at.to_s(:datetime_jp) %></span>
+          </div>
+          <div class="comment_area__list__comment__right_box__text">
+            <span><%= comment.comment %></span>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="comment_area">
-      <ul class="comment_area__list">
-        <% @comments.each do |comment| %>
-          <li class="comment_area__list__comment">
-            <div class="comment_area__list__comment__left_box">
-              <span><%= comment.user.name %></span>
-            </div>
-            <div class="comment_area__list__comment__right_box">
-              <div class="comment_area__list__comment__right_box__info">
-                <% if user_signed_in? && comment.user_id == current_user.id %>
-                  <span><%= link_to "編集", edit_post_comment_path(@post.id, comment.id) %></span>
-                  <span><%= link_to "削除", post_comment_path(@post, comment), method: :delete, data: { confirm: '本当に削除して良いですか?', cancel: 'やめる', commit: '削除する'}, title: '削除確認' %></span>
-                <% end %>
-                <span>投稿日時：<%= comment.created_at.to_s(:datetime_jp) %></span>
-              </div>
-              <div class="comment_area__list__comment__right_box__text">
-                <span><%= comment.comment %></span>
-              </div>
-            </div>
-          </li>
-        <% end %>
-      </ul>
-      <% if user_signed_in? %>
-        <div class="comment_area__form_box">
-          <%= form_with(model:[@post, @comment], class: "comment_area__form_box__form", local: true) do |f| %>
-            <%= render 'shared/error_messages', object: f.object %>
-            <div class="comment_area__form_box__form__field">
-              <%= f.text_area :comment, placeholder: 'コメントを入力', value: @comment.comment %>
-            </div>
-            <div class="comment_area__form_box__form__action">
-              <%= f.submit "送信", class: "comment_area__form_box__form__action__btn" %>
-            </div>
-          <% end %>
+      </li>
+    <% end %>
+  </ul>
+  <% if user_signed_in? %>
+    <div class="comment_area__form_box">
+      <%= form_with(model:[@post, @comment], class: "comment_area__form_box__form", local: true) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <div class="comment_area__form_box__form__field">
+          <%= f.text_area :comment, placeholder: 'コメントを入力', value: @comment.comment %>
+        </div>
+        <div class="comment_area__form_box__form__action">
+          <%= f.submit "送信", class: "comment_area__form_box__form__action__btn" %>
         </div>
       <% end %>
     </div>
-  </div>
+  <% end %>
 </div>
