@@ -23,6 +23,13 @@ RSpec.describe Post do
         expect(post.errors[:content]).to include("は140文字以内で入力してください")
       end
 
+      it "is invalid because user posts a content when not logged in " do
+        post = build(:post, user_id: nil)
+        post.valid?
+        expect(post).to be_invalid
+      end
+
+
     end
   end
 end
