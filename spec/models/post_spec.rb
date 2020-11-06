@@ -16,7 +16,7 @@ RSpec.describe Post do
         expect(post.errors[:content]).to include("を入力してください")
       end
 
-      it "is valid with a content that has more than 140 characters " do
+      it "is invalid with a content that has more than 140 characters " do
         post = build(:post)
         post.content = Faker::Lorem.characters(number:200)
         post.valid?
