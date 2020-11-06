@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
+  before_action :set_post, except: [:index, :new, :create]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :authenticate_admin!, only: [:edit, :update, :destroy]
-  before_action :set_post, except: [:index, :new]
 
   def index
     @posts = Post.includes(:user).all.order("created_at DESC")
@@ -50,8 +50,6 @@ class PostsController < ApplicationController
     end
 
     def authenticate_admin!
-      @post = Post.find(params[:id])
-      
       if @post.user_id != current_user.id
         flash[:notice] = "権限はありません"
         redirect_to root_url
