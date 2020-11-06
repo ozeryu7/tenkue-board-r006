@@ -22,6 +22,7 @@ RSpec.describe User do
         expect(user.errors[:email]).to include("を入力してください")
       end
 
+
       it "is invalid without a password" do
         user = build(:user, password: nil)
         user.valid?
@@ -41,9 +42,9 @@ RSpec.describe User do
       end
       
       it "is valid with a password that has less than 32 characters " do
-        user = build(:user, password: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+        user = build(:user, password: "testaaaaaaaaaaaaaaaaaaaaaaaaaaaa12345")
         user.valid?
-        expect(user.errors[:password][0]).to include("は32文字以内で入力してください")
+        expect(user.errors[:password]).to include("は32文字以内で入力してください")
       end
 
       it "is invalid with a duplicate email" do
@@ -52,6 +53,7 @@ RSpec.describe User do
         another_user.valid?
         expect(another_user.errors[:email]).to include("はすでに存在します")
       end
+
 
     end
   end
