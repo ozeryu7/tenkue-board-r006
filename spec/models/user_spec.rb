@@ -9,6 +9,11 @@ RSpec.describe User do
         expect(user).to be_valid
       end
 
+      it "is valid because the password is just 8 characters" do
+        user = build(:user, password: "test1234", password_confirmation: "test1234")
+        expect(user).to be_valid
+      end
+
       it "is valid because the password is just 32 characters" do
         user = build(:user, password: "test1234" * 4 , password_confirmation: "test1234" * 4)
         expect(user).to be_valid
