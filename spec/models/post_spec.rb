@@ -7,6 +7,11 @@ RSpec.describe Post do
         post = build(:post)
         expect(post).to be_valid
       end
+
+      it "is valid with a content that has 140 characters" do
+        post = build(:post, content: "a" * 140)
+        expect(post).to be_valid
+      end
     end
 
     context 'can not save' do
