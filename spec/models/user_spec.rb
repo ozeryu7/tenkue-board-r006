@@ -8,6 +8,11 @@ RSpec.describe User do
         user = build(:user)
         expect(user).to be_valid
       end
+
+      it "is valid because the password is just 32 characters" do
+        user = build(:user, password: "test1234" * 4 , password_confirmation: "test1234" * 4)
+        expect(user).to be_valid
+      end
     end
     context 'can not save' do
       it "is invalid without a name" do
