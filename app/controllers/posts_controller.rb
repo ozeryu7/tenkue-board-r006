@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :set_post, except: [:index, :new, :create]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :authenticate_admin!, only: [:edit, :update, :destroy]
 
@@ -7,11 +8,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
-  end
-
-  def show
-    
+    @comments = @post.comments.includes(:user).order("created_at DESC")
+    @comment = @post.comments.build(user_id: current_user.id, post_id: @post.id) if current_user
   end
 
   def new
@@ -52,12 +50,14 @@ class PostsController < ApplicationController
     end
 
     def authenticate_admin!
-      @post = Post.find(params[:id])
-      
       if @post.user_id != current_user.id
         flash[:notice] = "権限はありません"
         redirect_to root_url
       end
+    end
+
+    def set_post
+      @post = Post.find(params[:id])
     end
 end
 

@@ -28,11 +28,31 @@
           <ul class="post_detail__bottom_box__user_actions">
             <li>
               <i class="far fa-comment-alt"></i>
-              <span>1</span>
+              <span><%= @post.comments.count %></span>
             </li>
             <li>
-              <i class="far fa-heart"></i>
-              <span>1</span>
+              <% if user_signed_in?%>
+                <% if current_user.already_liked?(@post) %>
+                  <%= button_to like_path(post_id: @post.id), class: "heart post_liked", method: :delete do %>
+                    <i class="fas fa-heart"></i>
+                    <% if @post.likes.count > 0 %>
+                      <span><%= @post.likes.count %></span>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <%= button_to likes_path(post_id: @post.id), class: "heart", method: :post do %>
+                    <i class="far fa-heart"></i>
+                    <% if @post.likes.count > 0 %>
+                      <span><%= @post.likes.count %></span>
+                    <% end %>
+                  <% end %>
+                <% end%>
+              <% else %>
+                <i class="far fa-heart"></i>
+                <% if @post.likes.count > 0 %>
+                  <span><%= @post.likes.count %></span>
+                <% end %>
+              <% end%>
             </li>
           </ul>
           <% if user_signed_in? && @post.user_id == current_user.id %>
@@ -44,27 +64,6 @@
         </div>
       </div>
     </div>
-    <div class="comment_area">
-      <ul class="comment_area__list">
-        <li class="comment_area__list__comment">
-          <div class="comment_area__list__comment__left_box">
-            <span>コメント投稿者</span>
-          </div>
-          <div class="comment_area__list__comment__right_box">
-            <div class="comment_area__list__comment__right_box__info">
-              <span>編集</span>
-              <span>削除</span>
-              <span>投稿日時：投稿日時</span>
-            </div>
-            <div class="comment_area__list__comment__right_box__text">
-              <span>コメント内容</span>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <div class="comment_area__form_box">
-        <%# コメントのフォームを設置 %>
-      </div>
-    </div>
+    <%= render 'shared/post_comments' %>
   </div>
 </div>
